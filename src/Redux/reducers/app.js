@@ -12,8 +12,8 @@ const intiialState = {
   bannerScrolled: true,
   thirdPartySite: "",
   disableBottom: false,
-  // myBalance: 2000,
-  // enableBackWithBal: false,
+  myBalance: 2000,
+  enableBackWithBal: true,
 };
 
 export default function (state = intiialState, action) {
@@ -31,14 +31,16 @@ export default function (state = intiialState, action) {
         ...state,
         thirdPartySite: payload,
         disableBottom: !state.disableBottom,
+        bannerScrolled: false,
+        enableBackWithBal: !state.enableBackWithBal,
       };
     }
-    // case CHANGE_BALANCE: {
-    //   return {
-    //     ...state,
-    //     myBalance: payload,
-    //   };
-    // }
+    case CHANGE_BALANCE: {
+      return {
+        ...state,
+        myBalance: payload,
+      };
+    }
     case TOGGLE_BANNER: {
       return {
         ...state,

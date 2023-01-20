@@ -14,6 +14,8 @@ import { routes, screens } from "./RouteItems";
 import { Avatar, Badge, Text, useTheme } from "react-native-paper";
 import { useSelector } from "react-redux";
 import ReduxWrapper from "../Utils/ReduxWrapper";
+import Balance from "../Components/Balance";
+import HeaderRight from "../Components/HeaderRight";
 
 const Drawer = createDrawerNavigator();
 
@@ -48,7 +50,7 @@ const CustomDrawerContent = (props) => {
 
 const DrawerNavigator = ({ nav, app }) => {
   const theme = useTheme();
-  const { bannerScrolled = false } = app;
+  const { bannerScrolled = false, myBalance } = app;
   return (
     <Drawer.Navigator
       screenOptions={({ navigation }) => ({
@@ -73,30 +75,9 @@ const DrawerNavigator = ({ nav, app }) => {
         options={{
           title: "Home",
           headerTitle: () => {
-            return <>{bannerScrolled && <Text>Text here</Text>}</>;
+            return <>{bannerScrolled && <Balance myBalance={myBalance} />}</>;
           },
-          headerRight: () => (
-            <View style={styles.headerRight}>
-              <Image source={searchIcon} style={styles.headerRightIcon} />
-              <Image source={scanner} style={styles.headerRightIcon} />
-              {/* <Image source={notiInactive} style={styles.headerRightIcon} /> */}
-              <Badge
-                badgeStyle={styles.badge}
-                textStyle={styles.badgeText}
-                status="success"
-                size={10}
-                containerStyle={[styles.badgeContainer]}
-              >
-                <Image source={notiInactive} style={styles.headerRightIcon} />
-              </Badge>
-              {/* <Icon
-                name="bell"
-                size={20}
-                color={theme.colors.textPrimary}
-                style={styles.headerRightIcon}
-              /> */}
-            </View>
-          ),
+          headerRight: () => <HeaderRight />,
         }}
       />
     </Drawer.Navigator>
