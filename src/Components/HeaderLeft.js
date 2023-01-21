@@ -1,10 +1,16 @@
 import React from "react";
-import { Image, TouchableOpacity, View } from "react-native";
+import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
 import { Avatar } from "react-native-paper";
 import ReduxWrapper from "../Utils/ReduxWrapper";
-import backButton from "../assets/Images/backButton.png";
-function HeaderLeft({ app }) {
+import backButton from "../assets/Images/backButto.png";
+import { useNavigation } from "@react-navigation/native";
+import { screens } from "../Navigation/RouteItems";
+import { changeTheme } from "../Redux/actions/app";
+function HeaderLeft({ app, setThirdPartySite$ }) {
   const { enableBackWithBal = true } = app;
+  const navi = useNavigation();
+  // console.log(navi, "navi");
+
   if (!enableBackWithBal) {
     return (
       <TouchableOpacity
@@ -16,8 +22,16 @@ function HeaderLeft({ app }) {
     );
   } else {
     return (
-      <View>
-        <Image source={backButton} />
+      <View style={{ marginLeft: 9 }}>
+        <TouchableOpacity
+          onPress={() => {
+            setThirdPartySite$("");
+            navi.navigate(screens.Home);
+          }}
+          style={styles.headerLeft}
+        >
+          <Image source={backButton} />
+        </TouchableOpacity>
       </View>
     );
   }

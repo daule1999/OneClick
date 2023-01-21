@@ -4,6 +4,8 @@ import { useTheme } from "react-native-paper";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { ThemeSwitch } from "./stack-navigators/ThemeSwitch";
 import homeTabIcon from "../assets/Icons/homeTabIcon.png";
+import grabInactive from "../assets/Icons/grabInactive.png";
+import transInactive from "../assets/Icons/transInactive.png";
 
 export const screens = {
   HomeTab: "HomeTab",
@@ -24,13 +26,14 @@ export const screens = {
 const Title = ({ title }) => {
   return <Text>{title}</Text>;
 };
-const TabIcon = ({ focused }) => {
+const TabIcon = ({ src, focused }) => {
+  console.log(src, "src");
   const theme = useTheme();
-  const [color, setColor] = React.useState(theme.colors.colors);
+  const [active, setActive] = React.useState(false);
   React.useEffect(() => {
-    setColor(focused ? theme.colors.primary : theme.colors.textPrimary);
+    setActive(focused ? true : false);
   }, [focused]);
-  return <Image source={homeTabIcon} style={{ color: color }} />;
+  return <Image source={src} />;
 };
 export const routes = [
   {
@@ -39,7 +42,7 @@ export const routes = [
     title: "Home",
     showInTab: true,
     showInDrawer: true,
-    icon: (focused) => <TabIcon focused={focused} />,
+    icon: (focused) => <TabIcon src={homeTabIcon} focused={focused} />,
     Compo: () => <Title title="Home" />,
   },
   {
@@ -48,7 +51,7 @@ export const routes = [
     title: "Home",
     showInTab: true,
     showInDrawer: false,
-    icon: (focused) => <TabIcon focused={focused} />,
+    icon: (focused) => <TabIcon src={homeTabIcon} focused={focused} />,
     Compo: () => <Title title="Home" />,
   },
 
@@ -58,7 +61,7 @@ export const routes = [
     title: "Grab Deals",
     showInTab: true,
     showInDrawer: true,
-    icon: (focused) => <TabIcon focused={focused} />,
+    icon: (focused) => <TabIcon src={grabInactive} focused={focused} />,
     Compo: () => <Title title="Grab Deals" />,
   },
 
@@ -68,7 +71,7 @@ export const routes = [
     title: "Grab Deals",
     showInTab: false,
     showInDrawer: false,
-    icon: (focused) => <TabIcon focused={focused} />,
+    icon: (focused) => <TabIcon src={grabInactive} focused={focused} />,
     Compo: () => <Title title="Grab Deals" />,
   },
 
@@ -78,7 +81,7 @@ export const routes = [
     title: "Transactions",
     showInTab: true,
     showInDrawer: false,
-    icon: (focused) => <TabIcon focused={focused} />,
+    icon: (focused) => <TabIcon src={transInactive} focused={focused} />,
     Compo: () => <Title title="Home" />,
   },
   {
@@ -87,7 +90,7 @@ export const routes = [
     title: "Transactions",
     showInTab: false,
     showInDrawer: false,
-    icon: (focused) => <TabIcon focused={focused} />,
+    icon: (focused) => <TabIcon src={transInactive} focused={focused} />,
     Compo: () => <Title title="Transactions" />,
   },
 
@@ -97,7 +100,7 @@ export const routes = [
     title: "My Rewards",
     showInTab: false,
     showInDrawer: true,
-    icon: (focused) => <TabIcon focused={focused} />,
+    icon: (focused) => <TabIcon src={homeTabIcon} focused={focused} />,
     Compo: () => <Title title="My Rewards" />,
   },
   {
@@ -106,7 +109,7 @@ export const routes = [
     title: "My Rewards",
     showInTab: true,
     showInDrawer: false,
-    icon: (focused) => <TabIcon focused={focused} />,
+    icon: (focused) => <TabIcon src={homeTabIcon} focused={focused} />,
     Compo: () => <Title title="My Rewards" />,
   },
   {
@@ -115,7 +118,7 @@ export const routes = [
     title: "My Rewards",
     showInTab: false,
     showInDrawer: false,
-    icon: (focused) => <TabIcon focused={focused} />,
+    icon: (focused) => <TabIcon src={homeTabIcon} focused={focused} />,
     Compo: () => <Title title="My Rewards" />,
   },
 
@@ -125,7 +128,7 @@ export const routes = [
     title: "Locations",
     showInTab: false,
     showInDrawer: true,
-    icon: (focused) => <TabIcon focused={focused} />,
+    icon: (focused) => <TabIcon src={homeTabIcon} focused={focused} />,
     Compo: () => <Title title="Locations" />,
   },
   {
@@ -134,7 +137,7 @@ export const routes = [
     title: "Locations",
     showInTab: true,
     showInDrawer: false,
-    icon: (focused) => <TabIcon focused={focused} />,
+    icon: (focused) => <TabIcon src={homeTabIcon} focused={focused} />,
     Compo: () => <Title title="Locations" />,
   },
   {
@@ -143,7 +146,7 @@ export const routes = [
     title: "Theme",
     showInTab: false,
     showInDrawer: true,
-    icon: (focused) => <TabIcon focused={focused} />,
+    icon: (focused) => <TabIcon src={homeTabIcon} focused={focused} />,
     isCompo: true,
     Compo: () => <ThemeSwitch />,
   },
@@ -153,7 +156,7 @@ export const routes = [
     title: "ThirdParty",
     showInTab: false,
     showInDrawer: false,
-    icon: (focused) => <TabIcon focused={focused} />,
+    icon: (focused) => <TabIcon src={homeTabIcon} focused={focused} />,
     Compo: () => <Title title="ThirdParty" />,
   },
 ];

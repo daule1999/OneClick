@@ -24,11 +24,15 @@ function Home(props) {
     app,
     changeTheme$: toogle,
     toggleBanner$: toggleBanner,
+    setThirdPartySite$: setThirdPartySite,
     navigation,
   } = props;
   const { isDarkModeOn, bannerScrolled } = app;
   // console.log(bannerScrolled, "bannerScrolled", isDarkModeOn, "isDarkModeOn");
   // console.log(navigation, "navigate");
+  useEffect(() => {
+    setThirdPartySite("");
+  }, []);
 
   return (
     <ScrollView style={{ backgroundColor: theme.colors.background }}>

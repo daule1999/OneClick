@@ -87,8 +87,8 @@ const enHanceCreateStore = compose(
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const store = enHanceCreateStore(
-  // persistedReducer
-  rootReducer
+  persistedReducer
+  // rootReducer
   // applyMiddleware(...middleWares)
 );
 

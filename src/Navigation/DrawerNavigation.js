@@ -16,6 +16,7 @@ import { useSelector } from "react-redux";
 import ReduxWrapper from "../Utils/ReduxWrapper";
 import Balance from "../Components/Balance";
 import HeaderRight from "../Components/HeaderRight";
+import HeaderLeft from "../Components/HeaderLeft";
 
 const Drawer = createDrawerNavigator();
 
@@ -51,6 +52,7 @@ const CustomDrawerContent = (props) => {
 const DrawerNavigator = ({ nav, app }) => {
   const theme = useTheme();
   const { bannerScrolled = false, myBalance } = app;
+  console.log(bannerScrolled);
   return (
     <Drawer.Navigator
       screenOptions={({ navigation }) => ({
@@ -58,14 +60,7 @@ const DrawerNavigator = ({ nav, app }) => {
           backgroundColor: theme.colors.background,
           height: 50,
         },
-        headerLeft: () => (
-          <TouchableOpacity
-            onPress={() => navigation.toggleDrawer()}
-            style={styles.headerLeft}
-          >
-            <Avatar.Text size={24} label="XD" />
-          </TouchableOpacity>
-        ),
+        headerLeft: () => <HeaderLeft />,
       })}
       drawerContent={(props) => <CustomDrawerContent {...props} nav={nav} />}
     >
@@ -75,7 +70,15 @@ const DrawerNavigator = ({ nav, app }) => {
         options={{
           title: "Home",
           headerTitle: () => {
-            return <>{bannerScrolled && <Balance myBalance={myBalance} />}</>;
+            return (
+              <>
+                {bannerScrolled ? (
+                  <Balance myBalance={myBalance} />
+                ) : (
+                  <Text>HOME</Text>
+                )}
+              </>
+            );
           },
           headerRight: () => <HeaderRight />,
         }}
